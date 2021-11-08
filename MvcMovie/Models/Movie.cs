@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace MvcMovie.Models
 {
@@ -30,5 +31,7 @@ namespace MvcMovie.Models
         [StringLength(5)]
         [Required]
         public string Rating { get; set; }
+
+        public ICollection<Timetable> Timetables { get; set; }
     }
 }

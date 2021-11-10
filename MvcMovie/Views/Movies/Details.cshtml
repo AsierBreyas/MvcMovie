@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Movie</h4>
+    <h4>Movie #@Html.DisplayFor(model => model.Id)</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -43,6 +43,11 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>|
+    <a asp-action="Index">Back to List</a>|
+    <a asp-action="Details" asp-route-id="@Model.Id">Prev</a>|
+    @if((bool)ViewData["index"]){
+<a>#@Html.DisplayFor(model => model.Id)|</a>
+            }
+    <a asp-action="Details" asp-route-id="@Model.Id">Next</a>
 </div>

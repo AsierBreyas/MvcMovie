@@ -54,7 +54,7 @@ namespace MvcMovie.Controllers
             return "From [HttpPost]Index: filter on " + searchString;
         }
         // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? id, bool index)
         {
             if (id == null)
             {
@@ -67,6 +67,15 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
+            if(index)
+            {
+                ViewData["index"] = true;
+            }
+            else
+            {
+                ViewData["index"] = false;
+            }
+            ViewData["prev"] = (from x in Models.Movie where x.ID < orderby x.ID descending select x).FirstOrDefault;
 
             return View(movie);
         }

@@ -75,8 +75,10 @@ namespace MvcMovie.Controllers
             {
                 ViewData["index"] = false;
             }
-            ViewData["prev"] = (from x in Models.Movie where x.ID < orderby x.ID descending select x).FirstOrDefault;
-
+            var prev = (from x in _context.Movie where x.Id < id orderby x.Id descending select x).FirstOrDefault();
+            var next = (from x in _context.Movie where x.Id > id orderby x.Id ascending select x).FirstOrDefault();
+            ViewData["prev"] = prev;
+            ViewData["next"] = next;
             return View(movie);
         }
 

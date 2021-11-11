@@ -8,7 +8,6 @@
 
 <div>
     <h4>Movie #@Html.DisplayFor(model => model.Id)</h4>
-    <p>@ViewData["next"]</p>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -44,11 +43,49 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>|
-    <a asp-action="Index">Back to List</a>|
-    <a asp-action="Details" asp-route-id="@ViewData["prev"]">Prev</a>|
-    @if((bool)ViewData["index"]){
-<a>#@Html.DisplayFor(model => model.Id)|</a>
-            }
-    <a asp-action="Details" asp-route-id="@ViewData["next"]">Next</a>
+    @if ((bool)ViewData["index"])
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit |</a>
+        <a asp-action="Index"> Back to List |</a>
+        if ((bool)ViewData["anterior"] == true)
+        {
+            <a asp-action="Details" asp-route-id="@ViewData["prev"]" asp-route-index="true">Prev |</a>
+        }
+        else
+        {
+            <span>Prev</span>
+        }
+
+        <a>#@Html.DisplayFor(model => model.Id)|</a>
+        if ((bool)ViewData["siguiente"] == true)
+        {
+            <a asp-action="Details" asp-route-id="@ViewData["next"]" asp-route-index="true">Next</a>
+        }
+        else
+        {
+            <span>Next</span>
+        }
+    }
+    else
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit |</a>
+        <a asp-action="Index"> Back to List |</a>
+        if ((bool)ViewData["anterior"] == true)
+        {
+            <a asp-action="Details" asp-route-id="@ViewData["prev"]" asp-route-index="false">Prev |</a>
+        }
+        else
+        {
+            <span>Prev |</span>
+        }
+        if ((bool)ViewData["siguiente"] == true)
+        {
+            <a asp-action="Details" asp-route-id="@ViewData["next"]" asp-route-index="false">Next</a>
+        }
+        else
+        {
+            <span>Next</span>
+        }
+    }
+
 </div>

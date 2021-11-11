@@ -77,8 +77,20 @@ namespace MvcMovie.Controllers
             }
             var prev = (from x in _context.Movie where x.Id < id orderby x.Id descending select x).FirstOrDefault();
             var next = (from x in _context.Movie where x.Id > id orderby x.Id ascending select x).FirstOrDefault();
-            ViewData["prev"] = prev;
-            ViewData["next"] = next;
+            if( prev != null) {
+                ViewData["prev"] = prev.Id;
+                ViewData["anterior"] = true;
+            }else{
+                ViewData["anterior"] = false;
+            }
+            if (next != null){
+                ViewData["next"] = next.Id;
+                ViewData["siguiente"] = true;
+            }
+            else{
+                ViewData["siguiente"] = false;
+              
+            }
             return View(movie);
         }
 

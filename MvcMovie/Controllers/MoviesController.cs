@@ -56,9 +56,10 @@ namespace MvcMovie.Controllers
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id, bool index)
         {
+            var primero = (from x in _context.Movie orderby x.Id select x).FirstOrDefault();
             if (id == null)
             {
-                return NotFound();
+                id = primero.Id;
             }
 
             var movie = await _context.Movie
